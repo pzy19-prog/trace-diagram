@@ -8,6 +8,23 @@ Give a vision-capable agent a flowchart and a scenario. Get an animation that fo
 
 [观看 MP4](examples/resubmission/resubmit_once.mp4) · [查看原图](examples/resubmission/source.png) · [查看编号预览](examples/resubmission/resubmit_once.png) · [查看这条路线](examples/resubmission/route.json)
 
+## Try it in two minutes
+
+**Already have a diagram? Keep it.** Trace Diagram adds a walkthrough to the screenshot instead of redrawing the diagram. To review a route, check the numbered arrows against the source, then edit the route JSON and replay it.
+
+- **Watch first (no install):** Open the [retry example](examples/resubmission/resubmit_once.mp4). The same decision is reached twice: first “No” loops back to resubmit; then “Yes” goes to the archive. Compare the [original](examples/resubmission/source.png), [numbered review](examples/resubmission/resubmit_once.png), and [editable route](examples/resubmission/route.json).
+- **Reproduce it locally (no model or key):** From a checkout with Python 3.10+, run the commands below. Replace `python` with `python3` if that is how Python is installed.
+
+```sh
+python -m pip install -r requirements.txt
+python skills/trace-diagram/scripts/trace.py review examples/resubmission/source.png examples/resubmission/route.json --scene resubmit_once --out build/review.png
+python skills/trace-diagram/scripts/trace.py render examples/resubmission/source.png examples/resubmission/route.json --scene resubmit_once --out build/resubmit.gif
+```
+
+- **Try your own:** Copy [the skill](skills/trace-diagram) into `.agents/skills/` and give a vision-capable agent a diagram plus one concrete scenario. The agent proposes the route; Python checks and renders it. If a path includes an edge marked uncertain, the renderer stops rather than choosing a direction for you. The numbered preview is for checking interpretation, not proof the model always read the diagram correctly.
+
+Today this starts from **a diagram and a scenario**, not a whole paper or article. The local replay above uses a supplied route and does not test visual recognition. Your own image is read in whichever agent environment you choose.
+
 ## 在 Codex 中使用
 
 需要支持图像输入、能读写文件和执行 Python 的 Agent。将本项目的 [skills/trace-diagram](skills/trace-diagram) 目录复制到你的 Codex 项目的 `.agents/skills/` 下，保留目录名。安装 Python 3.10 或以上版本，然后在仓库根目录执行：
