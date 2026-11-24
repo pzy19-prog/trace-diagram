@@ -1,0 +1,4 @@
+interface:
+  display_name: "流程图路径动画"
+  short_description: "把流程图里的指定情景沿原图连线做成可核对、可纠正的动画。"
+  default_prompt: "用 $trace-diagram 读取这张流程图，演示一次退回再提交，并导出编号预览和动图。"
